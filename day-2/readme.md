@@ -67,12 +67,9 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
 - for script
 - I added us-east-1d to the zones list to avoid UnsupportedAvailabilityZoneException.
 - Ensure your IAM user/role has the required policies:
-  AmazonEKSClusterPolicy
-  AmazonEKSServicePolicy
-  AmazonEKSWorkerNodePolicy
-  AmazonEC2ContainerRegistryReadOnly
-  AmazonEKS_CNI_Policy
-  IAMFullAccess (or enough to create roles/attach policies)
+   AmazonEKSClusterPolicy AmazonEKSServicePolicy AmazonEKS_CNI_Policy AmazonEKSWorkerNodePolicy AmazonEC2ContainerRegistryReadOnly AmazonVPCFullAccess(covers VPC, subnets, IGW, NAT, Elastic IP) CloudFormationFullAccess IAMFullAccess(or enough to create/attach roles) AutoScalingFullAccess
+
+
   CloudFormationFullAccess and k8s_custom
   ```bash
   {
@@ -81,13 +78,14 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
     {
       "Effect": "Allow",
       "Action": [
-        "eks:DescribeCluster",
-        "eks:DescribeClusterVersions",
-        "eks:ListClusters",
-        "eks:CreateCluster",
-        "eks:DeleteCluster",
-        "eks:UpdateClusterVersion",
-        "eks:UpdateClusterConfig"
+        "eks:*",
+        "ec2:*",
+        "iam:*",
+        "cloudformation:*",
+        "autoscaling:*",
+        "ecr:*",
+        "logs:*",
+        "elasticloadbalancing:*"
       ],
       "Resource": "*"
     }
