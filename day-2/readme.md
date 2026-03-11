@@ -92,7 +92,7 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
       "Resource": "*"
     }
   ]
- }
+  }
   ```
   
 - If you’re using private nodegroups, make sure your VPC has NAT gateways for outbound internet access.
