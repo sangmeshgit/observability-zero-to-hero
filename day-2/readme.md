@@ -91,9 +91,60 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
   ]
   }
   ```
-  
-- If you’re using private nodegroups, make sure your VPC has NAT gateways for outbound internet access.
-  
+  Least‑Privilege Custom Policy (More Secure)
+  ```bash
+  {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "eks:CreateCluster",
+        "eks:DescribeCluster",
+        "eks:DescribeClusterVersions",
+        "eks:DeleteCluster",
+        "eks:ListClusters",
+        "eks:UpdateClusterConfig",
+        "eks:UpdateClusterVersion",
+        "ec2:CreateVpc",
+        "ec2:DeleteVpc",
+        "ec2:DescribeVpcs",
+        "ec2:CreateSubnet",
+        "ec2:DeleteSubnet",
+        "ec2:DescribeSubnets",
+        "ec2:CreateInternetGateway",
+        "ec2:AttachInternetGateway",
+        "ec2:DeleteInternetGateway",
+        "ec2:AllocateAddress",
+        "ec2:ReleaseAddress",
+        "ec2:CreateNatGateway",
+        "ec2:DeleteNatGateway",
+        "ec2:DescribeNatGateways",
+        "ec2:CreateRouteTable",
+        "ec2:AssociateRouteTable",
+        "ec2:CreateSecurityGroup",
+        "ec2:DeleteSecurityGroup",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "cloudformation:*",
+        "iam:CreateRole",
+        "iam:AttachRolePolicy",
+        "iam:PassRole",
+        "autoscaling:*",
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:DescribeRepositories",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "elasticloadbalancing:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+  }
+  ```
 ```bash
 eksctl create cluster --name=observability \
                       --region=us-east-1 \
