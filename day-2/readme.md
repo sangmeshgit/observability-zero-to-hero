@@ -161,7 +161,7 @@ eksctl utils associate-iam-oidc-provider \
 eksctl create nodegroup --cluster=observability \
                         --region=us-east-1 \
                         --name=observability-ng-private \
-                        --node-type=t3.medium \
+                        --node-type=t3.small \
                         --nodes-min=2 \
                         --nodes-max=3 \
                         --node-volume-size=20 \
@@ -183,7 +183,7 @@ aws eks update-kubeconfig --name observability
 CLUSTER_NAME="observability"
 REGION="us-east-1"
 NODEGROUP_NAME="observability-ng-private"
-NODE_TYPE="t3.medium"
+NODE_TYPE="t3.small"
 MIN_NODES=2
 MAX_NODES=3
 VOLUME_SIZE=20
