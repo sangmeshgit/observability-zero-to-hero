@@ -64,8 +64,16 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
 - Setup and configure AWS CLI using the `aws configure` command.
 - Install and configure eksctl using the steps mentioned [here]("https://eksctl.io/installation/").
 - Install and configure kubectl as mentioned [here]("https://kubernetes.io/docs/tasks/tools/").
-
-
+- for script
+- I added us-east-1d to the zones list to avoid UnsupportedAvailabilityZoneException.
+- Ensure your IAM user/role has the required policies:
+  AmazonEKSClusterPolicy
+  AmazonEKSServicePolicy
+  AmazonEKSWorkerNodePolicy
+  AmazonEC2ContainerRegistryReadOnly
+  AmazonEKS_CNI_Policy
+- If you’re using private nodegroups, make sure your VPC has NAT gateways for outbound internet access.
+  
 ```bash
 eksctl create cluster --name=observability \
                       --region=us-east-1 \
