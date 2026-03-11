@@ -72,6 +72,9 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
   AmazonEKSWorkerNodePolicy
   AmazonEC2ContainerRegistryReadOnly
   AmazonEKS_CNI_Policy
+  IAMFullAccess (or enough to create roles/attach policies)
+  CloudFormationFullAccess
+  
 - If you’re using private nodegroups, make sure your VPC has NAT gateways for outbound internet access.
   
 ```bash
