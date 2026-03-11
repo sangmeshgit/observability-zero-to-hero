@@ -148,7 +148,7 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
 ```bash
 eksctl create cluster --name=observability \
                       --region=us-east-1 \
-                      --zones=us-east-1a,us-east-1b \
+                      --zones=us-east-1a,us-east-1b,us-east-1d \
                       --without-nodegroup
 ```
 ```bash
