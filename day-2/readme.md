@@ -97,6 +97,55 @@ eksctl create nodegroup --cluster=observability \
 # Update ./kube/config file
 aws eks update-kubeconfig --name observability
 ```
+```
+#!/bin/bash
+
+# Variables
+CLUSTER_NAME="observability"
+REGION="us-east-1"
+NODEGROUP_NAME="observability-ng-private"
+NODE_TYPE="t3.medium"
+MIN_NODES=2
+MAX_NODES=3
+VOLUME_SIZE=20
+
+# Step 1: Create EKS Cluster (without nodegroup)
+eksctl create cluster \
+  --name $CLUSTER_NAME \
+  --region $REGION \
+  --zones=us-east-1a,us-east-1b,us-east-1d \
+  --without-nodegroup
+
+# Step 2: Associate IAM OIDC Provider
+eksctl utils associate-iam-oidc-provider \
+  --region $REGION \
+  --cluster $CLUSTER_NAME \
+  --approve
+
+# Step 3: Create Managed Nodegroup (Private Networking)
+eksctl create nodegroup \
+  --cluster $CLUSTER_NAME \
+  --region $REGION \
+  --name $NODEGROUP_NAME \
+  --node-type $NODE_TYPE \
+  --nodes-min $MIN_NODES \
+  --nodes-max $MAX_NODES \
+  --node-volume-size $VOLUME_SIZE \
+  --managed \
+  --asg-access \
+  --external-dns-access \
+  --full-ecr-access \
+  --appmesh-access \
+  --alb-ingress-access \
+  --node-private-networking
+
+# Step 4: Update kubeconfig
+aws eks update-kubeconfig --name $CLUSTER_NAME --region $REGION
+
+# Step 5: Verify Cluster & Nodes
+kubectl get nodes
+kubectl get pods --all-namespaces
+```
 
 ### 🧰 Step 2: Install kube-prometheus-stack
 ```bash
