@@ -68,6 +68,7 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
 - I added us-east-1d to the zones list to avoid UnsupportedAvailabilityZoneException.
 - Ensure your IAM user/role has the required policies:
    AmazonEKSClusterPolicy AmazonEKSServicePolicy AmazonEKS_CNI_Policy AmazonEKSWorkerNodePolicy AmazonEC2ContainerRegistryReadOnly AmazonVPCFullAccess(covers VPC, subnets, IGW, NAT, Elastic IP) CloudFormationFullAccess IAMFullAccess(or enough to create/attach roles) AutoScalingFullAccess and
+
   Custom Consolidated Policy (One Policy for Everything)
   ```bash
   {
