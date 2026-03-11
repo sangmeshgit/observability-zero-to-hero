@@ -69,8 +69,7 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
 - Ensure your IAM user/role has the required policies:
    AmazonEKSClusterPolicy AmazonEKSServicePolicy AmazonEKS_CNI_Policy AmazonEKSWorkerNodePolicy AmazonEC2ContainerRegistryReadOnly AmazonVPCFullAccess(covers VPC, subnets, IGW, NAT, Elastic IP) CloudFormationFullAccess IAMFullAccess(or enough to create/attach roles) AutoScalingFullAccess
 
-
-  CloudFormationFullAccess and k8s_custom
+  Custom Consolidated Policy (One Policy for Everything)
   ```bash
   {
   "Version": "2012-10-17",
