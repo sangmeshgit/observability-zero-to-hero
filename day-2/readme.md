@@ -73,7 +73,27 @@ Monitoring is the process of keeping an eye on these metrics over time to unders
   AmazonEC2ContainerRegistryReadOnly
   AmazonEKS_CNI_Policy
   IAMFullAccess (or enough to create roles/attach policies)
-  CloudFormationFullAccess
+  CloudFormationFullAccess and k8s_custom
+  ```bash
+  {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "eks:DescribeCluster",
+        "eks:DescribeClusterVersions",
+        "eks:ListClusters",
+        "eks:CreateCluster",
+        "eks:DeleteCluster",
+        "eks:UpdateClusterVersion",
+        "eks:UpdateClusterConfig"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+  ```
   
 - If you’re using private nodegroups, make sure your VPC has NAT gateways for outbound internet access.
   
